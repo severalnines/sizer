@@ -1,6 +1,11 @@
 Basic Installation
 ===================
 Check www.severalnines.com/sizer for the latest instructions.
+in short:
+edit the Makefile and set MYSQL_BASEDIR
+$ make
+
+
 
 Bugs
 ===================
