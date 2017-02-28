@@ -20,7 +20,7 @@
 #include <mysql.h>
 #include <my_config.h>
 #include <m_ctype.h>
-
+#include <unistd.h>
 
 #include <ndb_types.h>
 
@@ -656,7 +656,6 @@ int calculate_dm_ui(Ndb * ndb,
 			    
 {
   int no_var=0;
-  bool isNullable=false;
   int cols = 0;
   int noOfBits=0;
   bytesRam=0;
@@ -767,9 +766,6 @@ int calculate_dm_ui(Ndb * ndb,
       
       bytesRam += sz;
       bytesDisk += disk_sz;
-      
-      if(c->getNullable())
-	isNullable=true;
     }
   
   bytesRam = bytesRam + OH_UNIQUE_INDEX;
@@ -818,8 +814,6 @@ int supersizeme(Ndb * ndb,char * db, char * tbl, bool ftScan, bool ignoreData)
       return -1;
     }
 
-  bool isTable=false;
-  
   
   printf("\nCalculating storage cost per record for table %s\n", table->getName());
   
@@ -859,7 +853,6 @@ int supersizeme(Ndb * ndb,char * db, char * tbl, bool ftScan, bool ignoreData)
 	      dm_per_rec += tmpDm;
 	      disk_per_rec += tmpDisk;
 	      im_per_rec += tmpIm;
-	      isTable = true;
 	      noOfUniqueHashIndexes++;
 	      //no_attrs+=(ix->getNoOfColumns()+pk_cols);
         }
@@ -873,7 +866,6 @@ int supersizeme(Ndb * ndb,char * db, char * tbl, bool ftScan, bool ignoreData)
 		         " bytes of DataMemory.\n",
 		         elt.name, tmpDm  );
 	    dm_per_rec += tmpDm;
-	    isTable = true;
 	    noOfOrderedIndexes++;
 	    break;
 
