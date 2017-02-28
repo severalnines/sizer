@@ -194,7 +194,7 @@ void print_help()
   printf("  -t --tablename=<t>\t\tTable to analyse. Default is ''\n");
   printf("  -a --analyze-full-table\t\tPerforms a full table scan to calculate the average data usage for variable size columns, and gives also a record count. Otherwise 1024 random records are analyzed.\n");
   printf("  -l --loadfactor\t\t x is the percentage (0-100) how much of the VAR* columns you expect to fill up (on average). This is if you don't have any sample data to base the average on. 100 is (default). If there are records in the table then this parameter will not be used.\n");
-  printf("  -i --ignore-data\t\t Ignore records in tables if any and use laodfactor.\n");
+  printf("  -i --ignore-data\t\t Ignore records in tables if any and use loadfactor.\n");
   printf("  -v --verbose .\n");
   printf("\n");
 }
